@@ -1,5 +1,3 @@
-import fetch from 'node-fetch';
-
 const express = require('express');
 const request = require('request');
 
@@ -27,37 +25,7 @@ app.get('/',(req, res) => {
     
 });
 
-app.get('/tmd',(req, res) => {
-    let city = req.query.city;
-    var request = require('request');
-    
-    const url = new URL(URL_TMD_API_DAILY + '/at')
-    url.search = new URLSearchParams({
-        lat,
-        lon,
-        date,
-        duration,
-        hour,
-        fields: 'tc,tc_max,tc_min,rh,rain,cond,ws10m,wd10m',
-    })
 
-    try {
-        const result = await fetch(url, {
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + TMDTOKEN,
-        },
-        });
-        res.send(`${result}`)
-
-    } catch (error) {
-        throw error
-    }
-
-    
-    
-});
 
 app.listen(port, () => console.log(`server is at port ${port} for default`))
 
